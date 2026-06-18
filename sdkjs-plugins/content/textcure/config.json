@@ -1,6 +1,13 @@
 {
   "name": "TextCure",
   "guid": "asc.{D788954F-C5E5-4395-9905-B4D639FE952E}",
+  "version": "2.0.1",
+  "offered": "Yiran LU",
+  "description": "Improve the spelling and grammar in your texts. An unofficial plugin to Druide Antidote.",
+  "descriptionLocale": {
+    "fr": "Améliorez l'orthographe et la grammaire dans vos textes. Un plugin non-officiel à Druide Antidote."
+  },
+  "icons": ["resources/light/icon.png", "resources/light/icon@2x.png"],
   "variations": [
     {
       "description": "Improve the spelling and grammar in your texts. An unofficial plugin to Druide Antidote.",
@@ -140,7 +147,5 @@
         147
       ]
     }
-  ],
-  "version": "2.0.1",
-  "offered": "Yiran LU"
+  ]
 }
