@@ -1,0 +1,88 @@
+import {
+  ParamsAllowEdit,
+  ParamsGetZonesToCorrect,
+  ParamsReplace,
+  DocumentType,
+  TextZoneConnectix,
+  WordProcessorConfiguration
+} from "@druide-informatique/antidote-api-js";
+import { WordProcessorAgentOnlyOffice } from "./base";
+
+export class WordProcessorAgentOnlyOfficeUniversalSelection extends WordProcessorAgentOnlyOffice {
+  text: string | null;
+  alternativeText: string | null;
+
+  constructor(title: string) {
+    super(title);
+
+    this.text = null;
+    this.alternativeText = null;
+  }
+
+  configuration(): WordProcessorConfiguration {
+    return {
+      documentTitle: `${this.title} [selection]`,
+      activeMarkup: DocumentType.text,
+      carriageReturn: "\r\n"
+    };
+  }
+
+  applyCorrection(params: ParamsReplace): Promise<void> {
+    this.text = (
+      this.text!.substring(0, params.positionStartReplace) +
+      params.newString +
+      this.text!.substring(params.positionReplaceEnd)
+    );
+    const textArr = this.text!.replace(/(?:\r\n)+$/, "").split(/(?:\r\n){2}|\t/g);
+    // console.log("textArr: ", textArr)
+
+    return this.executeMethod("ReplaceTextSmart", [textArr, String.fromCharCode(160)]);
+  }
+
+
+  textZonesAvailable(): boolean {
+    if (this.replacingQueue.length > 0
+      && !this.mutexQueue.isLocked()
+      && !this.mutexDocument.isLocked())
+      return false;
+    return !!this.text;
+  }
+
+  allowEdit(params: ParamsAllowEdit): boolean {
+    if (this.text)
+      return true;
+    return false;
+  }
+
+  zonesToCorrect(params: ParamsGetZonesToCorrect): TextZoneConnectix[] {
+    return [
+      {
+        text: this.text ?? "Nothing to correct",
+        zoneId: "",
+        zoneIsFocused: true
+      }
+    ]
+  }
+
+  setAlternativeText(text: string | null) {
+    this.alternativeText = text ? text.replace("\r\n", "\r\n\r\n") : null;
+  }
+
+  updateText(): Promise<void> {
+    // console.log("updateText called");
+    this.text = null;
+
+    return this.executeMethod("GetSelectedText", [{
+      Numbering: false,
+      Math: false,
+      ParaSeparator: "\r\n\r\n",
+      TableRowSeparator: "\r\n\r\n",
+      TabSymbol: String.fromCharCode(160)
+    }])
+    .then((text: string) => {
+      console.log(`The Text: ${JSON.stringify(text)}`);
+      this.text = text === "" ? this.alternativeText: text;
+      console.log(`This Text: ${JSON.stringify(this.text)}`);
+    })
+  }
+}
