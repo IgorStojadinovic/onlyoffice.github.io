@@ -326,7 +326,6 @@
             var line = lines[i].trim().toLowerCase();
             if (line) serbianDict.add(line);
         }
-        console.log('cyrlatconverter: Loaded ' + serbianDict.size + ' words from dictionary');
     }
 
     function notifyCallbacks(err, success) {
