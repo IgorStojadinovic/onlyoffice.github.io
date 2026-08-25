@@ -14,7 +14,7 @@
     "Keep foreign words and brands unchanged (Windows, Google)": "Задржи стране речи и брендове непромењене (Windows, Google)",
     "Right-click selected text for a quick conversion": "Десни клик на означени текст за брзу конверзију",
     "Serbian converter": "Српски конвертер",
-    "Please select some text in the document first.": "Прво изаберите текст у документу.",
-    "There is nothing to convert in the selected text.": "Нема шта да се промени у изабраном тексту.",
+    "Please select some text first.": "Прво изаберите текст.",
+    "Nothing to convert.": "Нема шта да се конвертује.",
     "Conversion finished.": "Конверзија је завршена."
 }

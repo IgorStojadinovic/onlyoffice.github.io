@@ -59,6 +59,9 @@
         --btn-primary-bg: #185fa5;
         --btn-primary-fg: #ffffff;
         --btn-primary-hover: #0c447c;
+        --toast-warn-bg: #fff1d6;
+        --toast-warn-fg: #7a4a00;
+        --toast-warn-border: #e0a23a;
     }
 
     html.theme-dark,
@@ -73,6 +76,9 @@
         --btn-primary-bg: #ffffff;
         --btn-primary-fg: #111111;
         --btn-primary-hover: #e6e6e6;
+        --toast-warn-bg: #3d2f12;
+        --toast-warn-fg: #ffd789;
+        --toast-warn-border: #c9842a;
     }
 
     html,
@@ -105,16 +111,18 @@
         transform: translate(-50%, -50%) translateY(-20px);
         background-color: var(--btn-primary-bg);
         color: var(--btn-primary-fg);
-        padding: 12px 12px;
+        padding: 10px 16px;
         border-radius: 10px;
-        font-size: 14px;
+        font-size: 13px;
+        line-height: 1.35;
         font-family: Arial, sans-serif;
+        border: 1px solid transparent;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
         opacity: 0;
         transition: opacity 0.3s, transform 0.3s;
         z-index: 9999;
         text-align: center;
-        min-width: 100px;
+        white-space: nowrap;
         pointer-events: none;
     }
 
@@ -124,8 +132,10 @@
     }
 
     #toast.toast-warn {
-        background-color: #c9842a;
-        color: #111111;
+        background-color: var(--toast-warn-bg);
+        color: var(--toast-warn-fg);
+        border-color: var(--toast-warn-border);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
     }
 
     .instructions {

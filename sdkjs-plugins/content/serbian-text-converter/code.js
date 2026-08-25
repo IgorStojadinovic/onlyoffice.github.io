@@ -195,7 +195,7 @@ function action(id) {
 
     window.Asc.plugin.executeMethod('GetSelectedText', [SELECTION_PROPS], function (selectedText) {
         if (!selectedText || selectedText.trim() === '') {
-            showToast(tr('Please select some text in the document first.'), true, 3000);
+            showToast(tr('Please select some text first.'), true, 3000);
             return;
         }
 
@@ -208,7 +208,7 @@ function action(id) {
 
         // Check if any conversion happened
         if (paragraphs.join(PARA_SEP) === selectedText) {
-            showToast(tr('There is nothing to convert in the selected text.'), true, 3000);
+            showToast(tr('Nothing to convert here.'), true, 3000);
             return;
         }
 
