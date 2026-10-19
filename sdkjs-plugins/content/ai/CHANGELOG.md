@@ -165,3 +165,6 @@
 
 ## 3.2.3
 * Bug fix.
+
+## 3.3.5
+* Test marketplace update listing.
