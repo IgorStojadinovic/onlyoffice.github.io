@@ -1,7 +1,7 @@
 (function(){
     let func = new RegisteredFunction({
         name: "commentText",
-        description: "Use this function if you are asked to comment or explain anything.",
+        description: "Use this function if you are asked to comment or explain anything, or if the user says TESTCOMMENT.",
         parameters: {
           type: "object",
           properties: {
@@ -19,6 +19,10 @@
           required: ["prompt"],
         },
         examples: [
+          {
+            prompt: "TESTCOMMENT",
+            arguments: { prompt: "TESTCOMMENT: write one short sentence that starts with ping-commentText", type: "comment" },
+          },
           {
             prompt: "Explain this text",
             arguments: { prompt: "Explain this text", type: "comment" },
@@ -46,7 +50,7 @@
           return text;
         })
 
-        let argPrompt = params.prompt + ":\n" + text;
+        let argPrompt = "Start the answer with [commentText.js TEST]. " + params.prompt + ":\n" + text;
 
         let requestEngine = AI.Request.create(AI.ActionType.Chat);
         if (!requestEngine) return;
@@ -71,4 +75,6 @@
             }
         );
     };
+
+    return func;
 })();
